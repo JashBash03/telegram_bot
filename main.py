@@ -1,6 +1,11 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, CallbackContext
 import random
+import dotenv
+import os
+
+doteenv.load_dotenv()
+api_key = os.getenv("API_KEY")
 
 # Función que responde con "Hola Mundo" al comando /hola
 async def hola(update: Update, context: CallbackContext) -> None:
@@ -12,11 +17,9 @@ async def random_number(update: Update, context: CallbackContext) -> None:
     await update.message.reply_text(f'Número aleatorio: {numero}')
 
 def main():
-    # Usa el token que te dio BotFather
-    token = "7803540569:AAFJxmtNyls7Y0gxVX6nilAmNTpVE1fQvE8"
 
     # Crea la aplicación y pasa el token de tu bot
-    application = Application.builder().token(token).build()
+    application = Application.builder().token(api_key).build()
 
     # Registra los comandos con sus funciones respectivas
     application.add_handler(CommandHandler('hola', hola))
